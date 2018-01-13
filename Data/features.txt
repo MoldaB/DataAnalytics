@@ -1,0 +1,6 @@
+timestamp
+hand
+accumulatedYawRotation
+peakRate
+yawThreshold.bool
+rawThreshold.bool
