@@ -6,6 +6,7 @@ import pandas as pd
 import os
 
 ACTIVITIES = {
+    -1:'None',
     0: 'Forehand',
     1: 'Backhand',
 
@@ -27,18 +28,19 @@ import pandas as pd
 
 
 SIGNALS = [
-    "accumulatedYawRotation",
+    "hand",
     "peakRate",
-    "yawThreshold.bool",
-    "rawThreshold.bool",
-
+    "passedYawTreshold",
+    "passedNegativeYawTreshold",
+    "passedPeakRateThreshold",
+    "passedNegativePeakRateThreshold"
 ]
 
 # # Train Set + Text Set
-path_x_train = os.getcwd() + '/Data/Train/X_train.txt'
-path_y_train = os.getcwd() + '/Data/Train/y_train.txt'
-path_x_test = os.getcwd() + '/Data/Test/X_test.txt'
-path_y_test = os.getcwd() + '/Data/Test/y_test.txt'
+path_x_train = os.getcwd() + '/Data/x_train.txt'
+path_y_train = os.getcwd() + '/Data/y_train.txt'
+path_x_test = os.getcwd() + '/Data/x_test.txt'
+path_y_test = os.getcwd() + '/Data/y_test.txt'
 
 def _read_csv(filename):
     return pd.read_csv(filename, delim_whitespace=True, header=None)
@@ -73,17 +75,17 @@ def load_data():
     y_test = load_y('test')
     return X_train,X_test,y_train,y_test
 
-from keras import backend as K
-sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
-K.set_session(sess)
+# from keras import backend as K
+# sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
+# K.set_session(sess)
 
 from keras.models import Sequential
 from keras.layers import LSTM
 from keras.layers.core import Dense, Dropout
 
 epochs = 30
-batch_size = 16
-n_hidden = 32
+batch_size = 36
+n_hidden = 64
 
 def _count_classes(y):
     return len(set([tuple(category) for category in y]))

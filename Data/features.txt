@@ -1,6 +1,7 @@
 timestamp
 hand
-accumulatedYawRotation
 peakRate
-yawThreshold.bool
-rawThreshold.bool
+passedYawTreshold
+passedNegativeYawTreshold
+passedPeakRateThreshold
+passedNegativePeakRateThreshold
